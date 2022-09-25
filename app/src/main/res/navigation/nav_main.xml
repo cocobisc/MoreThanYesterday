@@ -7,6 +7,15 @@
     <fragment
         android:id="@+id/fragment_weather"
         android:name="com.example.morethanyesterday.ui.WeatherFragment" >
+        <action
+            android:id="@+id/action_weather_fragment_to_settingsFragment"
+            app:destination="@id/fragment_settings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="com.example.morethanyesterday.settings.SettingsFragment"
+        android:label="SettingFragment" >
     </fragment>
 
 </navigation>

@@ -19,15 +19,6 @@ import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
-//
-//    private var permRequestLauncher = registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { permissions ->
-//        val granted = permissions.entries.all {
-//            it.value
-//        }
-//        if (granted) {
-//            // do something when permissions granted
-//        }
-//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,11 +27,6 @@ class SplashActivity : AppCompatActivity() {
     }
 
     private fun setPermissions() {
-//        if (this.isPermissionsGranted(PERMISSIONS)) {
-//            // do something when permissions granted
-//        } else {
-//            permRequestLauncher.launch(PERMISSIONS)
-//        }
         val permissionListener = object : PermissionListener {
             override fun onPermissionGranted() {
                 val backgroundExecutable: ScheduledExecutorService = Executors.newSingleThreadScheduledExecutor()
@@ -65,6 +51,9 @@ class SplashActivity : AppCompatActivity() {
                         } catch (e: ActivityNotFoundException) {
                             e.printStackTrace()
                         }
+                    }
+                    .setNegativeButton("종료") { dialog, which ->
+                        finish()
                     }
                     .show()
 

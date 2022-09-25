@@ -21,7 +21,6 @@ buildscript {
         lifecycleVersion = '2.5.1'
         navigationVersion = '2.5.2'
         hiltVersion = '2.41'
-        preferenceVersion = "1.2.0"
         roomVersion = "2.4.3"
     }
 }

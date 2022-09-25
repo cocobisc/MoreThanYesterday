@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.morethanyesterday.data.Response
 import com.example.morethanyesterday.data.WeatherVO
 import com.example.morethanyesterday.ui.state.WeatherUiState
-import com.example.morethanyesterday.ui.state.convertToUiState
 import com.example.morethanyesterday.usecase.GetWeatherUseCase
 import com.example.morethanyesterday.utils.LocationProvider
+import com.example.morethanyesterday.utils.convertToUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.MutableStateFlow

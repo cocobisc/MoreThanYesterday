@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.example.morethanyesterday.Constants
 import com.example.morethanyesterday.R
@@ -20,22 +21,37 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 
 @AndroidEntryPoint
 class WeatherFragment: Fragment(R.layout.fragment_weather) {
     private val weatherViewModel: WeatherViewModel by viewModels()
     private val binding by viewBinding(FragmentWeatherBinding::bind)
 
-    private val degree = "°C"
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requestForInit()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         initObservers()
         initListeners()
-        requestForInit()
+        initToolBar()
+    }
+
+    private fun initToolBar() {
+        binding.toolbar.inflateMenu(R.menu.toolbar)
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.menu_setting -> {
+                    findNavController().navigate(WeatherFragmentDirections.actionWeatherFragmentToSettingsFragment())
+                    return@setOnMenuItemClickListener true
+                }
+                else -> false
+            }
+        }
     }
 
     private fun initListeners() {
@@ -54,16 +70,20 @@ class WeatherFragment: Fragment(R.layout.fragment_weather) {
 
         weatherViewModel.weatherUiState.launchAndCollectIn {
             binding.title.text = it.title
-            binding.address.text = it.address
+            if (it.address.isNotEmpty()) {
+                binding.address.text = it.address
+                binding.locImage.isVisible = true
+            }
 
             it.mainImageRes.takeIf { res -> res != -1 }?.let { res ->
+                binding.brushImage.isVisible = true
                 binding.mainImage.setImageDrawable(ContextCompat.getDrawable(requireContext(), res))
             }
 
-            binding.tempLayout.isVisible = it.tempVO != null
-            binding.date.text = it.date + "기준"
-            binding.prevTemp.text = it.tempVO?.prevTemp.toString() + degree
-            binding.currTemp.text = it.tempVO?.currTemp.toString() + degree
+            binding.tempLayout.isVisible = it.prevTemp.isNotEmpty()
+            binding.date.text = it.date
+            binding.prevTemp.text = it.prevTemp
+            binding.currTemp.text = it.currTemp
 
             Glide.with(this@WeatherFragment)
                 .load(Constants.ICON_URL + it.iconName + ".png")
