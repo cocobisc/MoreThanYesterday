@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/fragment_weather">
+
+    <fragment
+        android:id="@+id/fragment_weather"
+        android:name="com.example.morethanyesterday.ui.WeatherFragment" >
+        <action
+            android:id="@+id/action_weather_fragment_to_settingsFragment"
+            app:destination="@id/fragment_settings" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="com.example.morethanyesterday.settings.SettingsFragment"
+        android:label="SettingFragment" >
+    </fragment>
+
+</navigation>

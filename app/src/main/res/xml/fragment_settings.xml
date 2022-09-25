@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:iconSpaceReserved="false">
+
+    <PreferenceCategory
+        android:title="세팅"
+        app:iconSpaceReserved="false">
+
+        <SwitchPreference
+            android:key="toggle"
+            android:title="알림 작동"
+            app:iconSpaceReserved="false"/>
+
+        <Preference
+            android:key="time"
+            android:title="알림 시간 설정"
+            android:dependency="toggle"
+            app:iconSpaceReserved="false"/>
+
+    </PreferenceCategory>
+</PreferenceScreen>
