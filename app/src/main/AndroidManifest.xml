@@ -27,12 +27,11 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
-                <action android:name="com.lgtm.daily_weather_widget.APPWIDGET_UPDATE" />
             </intent-filter>
 
             <meta-data
                 android:name="android.appwidget.provider"
-                android:resource="@xml/widget" />
+                android:resource="@xml/widget_info" />
         </receiver>
 
         <receiver android:name=".alarm.receiver.DeviceBootReceiver"
